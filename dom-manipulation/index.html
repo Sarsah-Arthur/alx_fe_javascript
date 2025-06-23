@@ -10,41 +10,53 @@
       padding: 20px;
       background: #f0f0f0;
     }
+    h1 {
+      margin-bottom: 10px;
+    }
     #quoteDisplay {
       margin: 20px 0;
       padding: 15px;
       border: 1px solid #ccc;
       background-color: #fff;
     }
-    input {
+    input, select, button {
       margin: 5px;
-      padding: 5px;
+      padding: 8px;
+      font-size: 14px;
     }
     button {
-      padding: 6px 10px;
-      margin: 5px;
       cursor: pointer;
     }
+    #formContainer,
     #controls {
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
+
   <h1>Dynamic Quote Generator</h1>
 
+  <!-- Category Filter -->
+  <label for="categoryFilter">Filter by Category:</label>
+  <select id="categoryFilter">
+    <option value="all">All Categories</option>
+  </select>
+
+  <!-- Display Quote -->
   <div id="quoteDisplay">Click the button to see a quote.</div>
   <button id="newQuote">Show New Quote</button>
 
-  <!-- Static form placeholder (JavaScript still adds inputs here) -->
+  <!-- Form Placeholder (JS inserts here) -->
   <div id="formContainer"></div>
 
-  <!-- ✅ Static import/export controls for test visibility -->
+  <!-- Export / Import Controls -->
   <div id="controls">
     <button id="exportBtn">Export Quotes</button>
     <input type="file" id="importFile" accept=".json" />
   </div>
 
+  <!-- Main JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
