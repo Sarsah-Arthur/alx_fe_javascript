@@ -10,7 +10,6 @@ function loadQuotes() {
   if (storedQuotes) {
     quotes = JSON.parse(storedQuotes);
   } else {
-    // Default quotes if localStorage is empty
     quotes = [
       { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Motivational" },
       { text: "Life is really simple, but we insist on making it complicated.", category: "Life" },
@@ -24,7 +23,7 @@ function saveQuotes() {
   localStorage.setItem("quotes", JSON.stringify(quotes));
 }
 
-// ===== Session Storage Integration (Last Quote Viewed) =====
+// ===== Session Storage (Last Viewed Quote) =====
 function saveLastViewedQuote(quote) {
   sessionStorage.setItem("lastViewedQuote", JSON.stringify(quote));
 }
@@ -70,7 +69,9 @@ function createAddQuoteForm() {
   formContainer.appendChild(quoteInput);
   formContainer.appendChild(categoryInput);
   formContainer.appendChild(addButton);
-  document.body.appendChild(formContainer);
+
+  // Inject into HTML placeholder
+  document.getElementById("formContainer").appendChild(formContainer);
 }
 
 // ===== Add New Quote =====
@@ -141,7 +142,9 @@ function createImportExportControls() {
 
   controls.appendChild(exportBtn);
   controls.appendChild(importInput);
-  document.body.appendChild(controls);
+
+  // Inject into HTML placeholder
+  document.getElementById("controls").appendChild(controls);
 }
 
 // ===== Initialize App =====
