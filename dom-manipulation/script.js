@@ -126,33 +126,20 @@ function importFromJsonFile(event) {
 }
 
 // ===== Create Import/Export Controls =====
-function createImportExportControls() {
-  const controls = document.createElement("div");
+function setupImportExportControls() {
+  const exportBtn = document.getElementById("exportBtn");
+  const importInput = document.getElementById("importFile");
 
-  // Export Button
-  const exportBtn = document.createElement("button");
-  exportBtn.textContent = "Export Quotes";
-  exportBtn.onclick = exportToJsonFile;
-
-  // Import Input
-  const importInput = document.createElement("input");
-  importInput.type = "file";
-  importInput.accept = ".json";
-  importInput.onchange = importFromJsonFile;
-
-  controls.appendChild(exportBtn);
-  controls.appendChild(importInput);
-
-  // Inject into HTML placeholder
-  document.getElementById("controls").appendChild(controls);
+  exportBtn.addEventListener("click", exportToJsonFile);
+  importInput.addEventListener("change", importFromJsonFile);
 }
 
 // ===== Initialize App =====
-document.addEventListener("DOMContentLoaded", () => {
+ddocument.addEventListener("DOMContentLoaded", () => {
   loadQuotes();
   loadLastViewedQuote();
 
   newQuoteBtn.addEventListener("click", showRandomQuote);
   createAddQuoteForm();
-  createImportExportControls();
+  setupImportExportControls(); // updated method
 });

@@ -36,11 +36,14 @@
   <div id="quoteDisplay">Click the button to see a quote.</div>
   <button id="newQuote">Show New Quote</button>
 
-  <!-- Placeholder for dynamic form -->
+  <!-- Static form placeholder (JavaScript still adds inputs here) -->
   <div id="formContainer"></div>
 
-  <!-- Placeholder for import/export controls -->
-  <div id="controls"></div>
+  <!-- ✅ Static import/export controls for test visibility -->
+  <div id="controls">
+    <button id="exportBtn">Export Quotes</button>
+    <input type="file" id="importFile" accept=".json" />
+  </div>
 
   <script src="script.js"></script>
 </body>
