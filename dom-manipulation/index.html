@@ -31,6 +31,11 @@
     #controls {
       margin-top: 20px;
     }
+    #syncNotice {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -43,11 +48,14 @@
     <option value="all">All Categories</option>
   </select>
 
+  <!-- Sync Notice -->
+  <div id="syncNotice"></div>
+
   <!-- Display Quote -->
   <div id="quoteDisplay">Click the button to see a quote.</div>
   <button id="newQuote">Show New Quote</button>
 
-  <!-- Form Placeholder (JS inserts here) -->
+  <!-- Form Placeholder -->
   <div id="formContainer"></div>
 
   <!-- Export / Import Controls -->
@@ -56,7 +64,6 @@
     <input type="file" id="importFile" accept=".json" />
   </div>
 
-  <!-- Main JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
