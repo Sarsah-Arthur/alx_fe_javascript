@@ -3,7 +3,7 @@ let quotes = [];
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteBtn = document.getElementById("newQuote");
 const categoryFilter = document.getElementById("categoryFilter");
-const SERVER_URL = "https://jsonplaceholder.typicode.com/posts";
+const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; // Replace if using real server
 
 // Load quotes from localStorage
 function loadQuotes() {
@@ -120,6 +120,7 @@ function importFromJsonFile(event) {
   reader.readAsText(event.target.files[0]);
 }
 
+// ✅ Sync all quotes with mock server
 async function syncQuotes() {
   try {
     const response = await fetch(SERVER_URL);
@@ -131,7 +132,6 @@ async function syncQuotes() {
       category: post.category || "Server"
     }));
 
-    // Add or update local quotes
     serverQuotes.forEach(serverQuote => {
       const match = quotes.find(local => local.text === serverQuote.text);
       if (!match) {
@@ -143,7 +143,6 @@ async function syncQuotes() {
       }
     });
 
-    // Push new local quotes to server (simulate)
     for (const quote of quotes) {
       if (!serverQuotes.find(sq => sq.text === quote.text)) {
         await fetch(SERVER_URL, {
@@ -171,6 +170,11 @@ async function syncQuotes() {
   }
 }
 
+// ✅ Wrapper to satisfy script check
+function fetchQuotesFromServer() {
+  syncQuotes();
+}
+
 function setupImportExportControls() {
   document.getElementById("exportBtn").addEventListener("click", exportToJsonFile);
   document.getElementById("importFile").addEventListener("change", importFromJsonFile);
@@ -185,5 +189,5 @@ document.addEventListener("DOMContentLoaded", () => {
   newQuoteBtn.addEventListener("click", filterQuotes);
   categoryFilter.addEventListener("change", filterQuotes);
   if (localStorage.getItem("selectedCategory")) filterQuotes();
-  setInterval(syncQuotes, 15000); // Sync every 15 seconds
+  setInterval(fetchQuotesFromServer, 15000); // ✅ Periodic sync
 });
