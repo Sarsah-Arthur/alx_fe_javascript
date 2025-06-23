@@ -8,7 +8,7 @@
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background: #f0f0f0;
+      background: #f7f7f7;
     }
     h1 {
       margin-bottom: 10px;
@@ -23,13 +23,6 @@
       margin: 5px;
       padding: 8px;
       font-size: 14px;
-    }
-    button {
-      cursor: pointer;
-    }
-    #formContainer,
-    #controls {
-      margin-top: 20px;
     }
     #syncNotice {
       color: green;
@@ -48,9 +41,6 @@
     <option value="all">All Categories</option>
   </select>
 
-  <!-- Sync Notice -->
-  <div id="syncNotice"></div>
-
   <!-- Display Quote -->
   <div id="quoteDisplay">Click the button to see a quote.</div>
   <button id="newQuote">Show New Quote</button>
@@ -59,11 +49,15 @@
   <div id="formContainer"></div>
 
   <!-- Export / Import Controls -->
-  <div id="controls">
+  <div>
     <button id="exportBtn">Export Quotes</button>
     <input type="file" id="importFile" accept=".json" />
   </div>
 
+  <!-- Sync Notice -->
+  <div id="syncNotice"></div>
+
+  <!-- Main JS -->
   <script src="script.js"></script>
 </body>
 </html>
