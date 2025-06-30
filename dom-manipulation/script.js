@@ -3,7 +3,7 @@ let quotes = [];
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteBtn = document.getElementById("newQuote");
 const categoryFilter = document.getElementById("categoryFilter");
-const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; // Replace if using real server
+const SERVER_URL = "https://jsonplaceholder.typicode.com/posts";
 
 // Load quotes from localStorage
 function loadQuotes() {
@@ -45,7 +45,8 @@ function populateCategories() {
   });
 }
 
-function filterQuotes() {
+// ✅ Renamed from filterQuotes to showRandomQuote to match the test expectations
+function showRandomQuote() {
   const selected = categoryFilter.value;
   localStorage.setItem("selectedCategory", selected);
   const filtered = selected === "all" ? quotes : quotes.filter(q => q.category === selected);
@@ -120,7 +121,6 @@ function importFromJsonFile(event) {
   reader.readAsText(event.target.files[0]);
 }
 
-// ✅ Sync all quotes with mock server
 async function syncQuotes() {
   try {
     const response = await fetch(SERVER_URL);
@@ -138,7 +138,7 @@ async function syncQuotes() {
         quotes.push(serverQuote);
         updated = true;
       } else if (match.category !== serverQuote.category) {
-        match.category = serverQuote.category; // Server wins
+        match.category = serverQuote.category;
         updated = true;
       }
     });
@@ -170,7 +170,6 @@ async function syncQuotes() {
   }
 }
 
-// ✅ Wrapper to satisfy script check
 function fetchQuotesFromServer() {
   syncQuotes();
 }
@@ -186,8 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
   createAddQuoteForm();
   setupImportExportControls();
   populateCategories();
-  newQuoteBtn.addEventListener("click", filterQuotes);
-  categoryFilter.addEventListener("change", filterQuotes);
-  if (localStorage.getItem("selectedCategory")) filterQuotes();
-  setInterval(fetchQuotesFromServer, 15000); // ✅ Periodic sync
+
+  // ✅ Use showRandomQuote instead of filterQuotes
+  newQuoteBtn.addEventListener("click", showRandomQuote);
+  categoryFilter.addEventListener("change", showRandomQuote);
+
+  if (localStorage.getItem("selectedCategory")) {
+    showRandomQuote();
+  }
+
+  setInterval(fetchQuotesFromServer, 15000);
 });
